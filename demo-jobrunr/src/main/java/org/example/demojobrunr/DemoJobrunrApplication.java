@@ -15,6 +15,4 @@ public class DemoJobrunrApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoJobrunrApplication.class, args);
     }
-
-
 }
