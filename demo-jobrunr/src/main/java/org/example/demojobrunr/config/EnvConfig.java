@@ -11,12 +11,14 @@ import java.nio.file.Paths;
 public class EnvConfig {
 
     @Bean
-    public Dotenv dotenv() {
-        // Lấy đường dẫn của JAR đang chạy
-        Path jarDir = Paths.get(System.getProperty("user.dir"));
-        return Dotenv.configure()
-                .directory(jarDir.toString()) // Thiết lập thư mục là vị trí của JAR
-                .filename("environment.env")  // Tên file env
+    public String loadEnvVariables() {
+        Dotenv dotenv = Dotenv.configure()
+                .directory(System.getProperty("user.dir"))
+                .filename("environment.env")
                 .load();
+
+        // Đặt các biến môi trường
+        dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
+        return "Success";
     }
 }
